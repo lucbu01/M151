@@ -1,6 +1,24 @@
 # M151 Webshop
 Webshop Projekt für das Modul 151
 
+ - [Projektbeschrieb](#projektbeschrieb)
+   - [Personengruppen](#personengruppen)
+     - [Besucher](#besucher)
+     - [Benutzer](#benutzer)
+     - [Administrator](#administrator)
+   - [User Stories](#user-stories)
+     - [Produkte anschauen](#produkte-anschauen)
+     - [Registrieren](#registrieren)
+     - [Anmelden](#anmelden)
+     - [Warenkorb](#warenkorb)
+     - [Bestellen](#bestellen)
+     - [Produkte hinzufügen](#produkte-hinzufügen)
+     - [Produkte bearbeiten](#produkte-bearbeiten)
+     - [Produkte löschen](#produkte-löschen)
+     - [Bestellstatus ändern](#bestellstatus-ändern)
+   - [Technologien](#technologien)
+ - [Installation](#installation)
+
 ## Projektbeschrieb
 In meinem Projekt im Modul 151 will ich einen Webshop für verschiedene Produkte entwickeln.
 
@@ -50,3 +68,18 @@ Als Administrator möchte ich den Status einer Bestellung auf VERSCHICKT stellen
  - Spring Boot
  - Postrgresql
  - Angular
+
+
+
+## Installation
+
+Backend:
+```
+./gradlew bootRun
+```
+
+Frontend:
+```
+npm install
+npm start
+```
