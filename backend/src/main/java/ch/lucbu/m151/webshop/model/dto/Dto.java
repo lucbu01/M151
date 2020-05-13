@@ -7,6 +7,8 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import ch.lucbu.m151.webshop.exception.ValidationException;
+
 public abstract class Dto {
   public boolean validate() throws ValidationException {
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

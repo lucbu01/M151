@@ -72,14 +72,41 @@ Als Administrator möchte ich den Status einer Bestellung auf VERSCHICKT stellen
 
 
 ## Installation
+~ = repository root folder
 
-Backend:
+### Datenbank
+Ordner: ~
 ```
-./gradlew bootRun
+sudo docker-compose up
 ```
 
-Frontend:
+### Backend
+Ordner: ~/backend
+```
+/gradlew bootRun
+```
+
+### Frontend
+Ordner: ~/frontend
+
 ```
 npm install
-npm start
+npm run startLocalhost
+```
+
+
+
+## Curl-Beispiele
+Backend muss hochgefahren und mit der Datenbank verbunden sein
+
+### User erstellen
+E-Mail Adresse darf noch nicht verwendet worden sein
+```
+curl -d '{"email": "lucbu01@bluewin.ch","password": "12345678","firstName": "Luca","lastName": "Bucher","street":"Scheid 1","postalCode":"6026","city":"Rain"}' -H "Content-Type: application/json" -X POST http://localhost:8080/api/user/create
+```
+
+### User info abfragen
+User muss schon erstellt worden sein mit entsprechendem Passwort
+```
+curl -u lucbu01@bluewin.ch:12345678 http://localhost:8080/api/user/info
 ```

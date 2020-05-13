@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
 
+import ch.lucbu.m151.webshop.model.User;
 import ch.lucbu.m151.webshop.model.UserRole;
 
 public class UserDto extends Dto {
@@ -44,6 +45,17 @@ public class UserDto extends Dto {
   private String city;
 
   public UserDto() {
+  }
+
+  public UserDto(User user) {
+    this.id = user.getId();
+    this.email = user.getEmail();
+    this.firstName = user.getFirstName();
+    this.lastName = user.getLastName();
+    this.role = user.getRole();
+    this.street = user.getStreet();
+    this.postalCode = user.getPostalCode();
+    this.city = user.getCity();
   }
 
   public UUID getId() {
