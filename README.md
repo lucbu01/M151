@@ -72,7 +72,7 @@ sudo docker-compose up
 ### Backend
 Ordner: ~/backend
 ```
-/gradlew bootRun
+./gradlew bootRun
 ```
 
 ### Frontend
@@ -94,7 +94,7 @@ E-Mail Adresse darf noch nicht verwendet worden sein
 curl -d '{"email": "lucbu01@bluewin.ch","password": "12345678","firstName": "Luca","lastName": "Bucher","street":"Scheid 1","postalCode":"6026","city":"Rain"}' -H "Content-Type: application/json" -X POST http://localhost:8080/api/user/create
 ```
 
-### User info abfragen
+### User-Info abfragen
 User muss schon erstellt worden sein mit entsprechendem Passwort
 ```
 curl -u lucbu01@bluewin.ch:12345678 http://localhost:8080/api/user/info
