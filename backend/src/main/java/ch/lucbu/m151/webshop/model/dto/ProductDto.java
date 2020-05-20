@@ -1,44 +1,42 @@
-package ch.lucbu.m151.webshop.model;
+package ch.lucbu.m151.webshop.model.dto;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
-import ch.lucbu.m151.webshop.model.dto.ProductDto;
+import org.hibernate.validator.constraints.Length;
 
-@Entity
-public class Product {
+import ch.lucbu.m151.webshop.model.Product;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+public class ProductDto extends Dto {
+
   private UUID id;
 
-  @Column(nullable = false, unique = true)
   private Long number;
 
-  @Column(nullable = false)
+  @NotBlank
+  @Length(max = 50)
   private String name;
 
-  @Lob
-  @Column(nullable = false)
+  @NotBlank
   private String description;
 
-  @Column(nullable = false)
+  @Min(value = 0)
   private BigDecimal price;
 
-  public Product() {
+  public ProductDto() {
   }
 
-  public Product(ProductDto dto) {
-    this.name = dto.getName();
-    this.description = dto.getDescription();
-    this.price = dto.getPrice();
+  public ProductDto(Product product, boolean withDescription) {
+    this.id = product.getId();
+    this.number = product.getNumber();
+    this.name = product.getName();
+    if (withDescription) {
+      this.description = product.getDescription();
+    }
+    this.price = product.getPrice();
   }
 
   public UUID getId() {

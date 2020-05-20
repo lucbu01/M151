@@ -1,5 +1,6 @@
 package ch.lucbu.m151.webshop.repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,5 +10,7 @@ import ch.lucbu.m151.webshop.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, UUID> {
+  Optional<Product> findByNumber(Long number);
 
+  Optional<Product> findTopByOrderByNumberDesc();
 }

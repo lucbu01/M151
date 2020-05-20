@@ -121,9 +121,9 @@ public class User implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    List<GrantedAuthority> auths = Arrays.asList(new StringAuthority(role.toString()));
+    List<GrantedAuthority> auths = Arrays.asList(new StringAuthority("ROLE_" + role.toString()));
     if (role == UserRole.ADMIN) {
-      auths.add(new StringAuthority("USER"));
+      auths.add(new StringAuthority("ROLE_USER"));
     }
     return auths;
   }
