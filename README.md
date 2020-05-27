@@ -109,7 +109,15 @@ Backend muss hochgefahren und mit der Datenbank verbunden sein
 E-Mail Adresse darf noch nicht verwendet worden sein
 
 ```sh
-curl -d '{"email": "lucbu01@bluewin.ch","password": "12345678","firstName": "Luca","lastName": "Bucher","street":"Scheid 1","postalCode":"6026","city":"Rain"}' -H "Content-Type: application/json" -X POST http://localhost:8080/api/user/create
+curl -X POST -H 'Content-Type: application/json' -d '{
+   "email": "lucbu01@bluewin.ch",
+   "password": "12345678",
+   "firstName": "Luca",
+   "lastName": "Bucher",
+   "street":"Scheid 1",
+   "postalCode":"6026",
+   "city":"Rain"
+  }' http://localhost:8080/api/user/create
 ```
 
 ### User-Info abfragen
@@ -126,7 +134,7 @@ curl -u lucbu01@bluewin.ch:12345678 http://localhost:8080/api/user/info
 - Die Rolle des Users muss auf der Datenbank auf ADMIN (1) geändert worden sein
 
 ```sh
-curl -u admin@admin.ch:12345678 -X POST --header 'Content-Type: application/json' -d '{
+curl -u admin@admin.ch:12345678 -X POST -H 'Content-Type: application/json' -d '{
  "name": "Samsung Galaxy S20",
  "description": "Das neuste",
  "price": "799.90"
@@ -156,7 +164,17 @@ curl localhost:8080/api/product/get/1
 - Die Rolle des Users muss auf der Datenbank auf ADMIN (1) geändert worden sein
 
 ```sh
-curl -u admin@admin.ch:12345678 -X POST --header 'Content-Type: application/json' -d '{
+curl -u admin@admin.ch:12345678 -X POST -H 'Content-Type: application/json' -d '{
  "description": "Das ist die neue und ausführlichere Beschreibung für das Produkt 1"
 }' http://localhost:8080/api/product/update/1
+```
+
+### Produkt löschen
+
+- Produkt muss schon erstellt worden sein
+- User muss schon erstellt worden sein mit entsprechenden Passwort
+- Die Rolle des Users muss auf der Datenbank auf ADMIN (1) geändert worden sein
+
+```sh
+curl -u admin@admin.ch:12345678 -X DELETE  http://localhost:8080/api/product/delete/1
 ```

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,5 +42,11 @@ public class ProductController {
   @ResponseStatus(code = HttpStatus.OK)
   public void create(@PathVariable Long number, @RequestBody ProductDto productDto) throws Exception {
     productService.update(number, productDto);
+  }
+
+  @DeleteMapping("/delete/{number}")
+  @ResponseStatus(code = HttpStatus.OK)
+  public void delete(@PathVariable Long number) throws Exception {
+    productService.delete(number);
   }
 }

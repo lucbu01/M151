@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
 import ch.lucbu.m151.webshop.exception.WebshopException;
@@ -24,7 +22,7 @@ public class ProductService {
   private ProductRepository productRepository;
 
   public List<ProductDto> getAll() {
-    return productRepository.findAll(Sort.by(Order.asc("name"))).stream().map(product -> new ProductDto(product, false))
+    return productRepository.findByDeletedIsNullOrderByNameAsc().stream().map(product -> new ProductDto(product, false))
         .collect(Collectors.toList());
   }
 
@@ -63,5 +61,13 @@ public class ProductService {
       product.setPrice(dto.getPrice());
     }
     productRepository.save(product);
+  }
+
+  public void delete(Long number) {
+    Product product = getProductByNumber(number);
+    if (product.isActive()) {
+      product.delete();
+      productRepository.save(product);
+    }
   }
 }

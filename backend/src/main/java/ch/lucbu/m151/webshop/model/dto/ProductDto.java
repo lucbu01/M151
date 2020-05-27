@@ -26,6 +26,8 @@ public class ProductDto extends Dto {
   @Min(value = 0)
   private BigDecimal price;
 
+  private boolean active;
+
   public ProductDto() {
   }
 
@@ -37,6 +39,7 @@ public class ProductDto extends Dto {
       this.description = product.getDescription();
     }
     this.price = product.getPrice();
+    this.active = product.isActive();
   }
 
   public UUID getId() {
@@ -77,5 +80,13 @@ public class ProductDto extends Dto {
 
   public void setPrice(BigDecimal price) {
     this.price = price;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
+  }
+
+  public boolean isActive() {
+    return active;
   }
 }
