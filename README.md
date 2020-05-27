@@ -164,7 +164,7 @@ curl localhost:8080/api/product/get/1
 - Die Rolle des Users muss auf der Datenbank auf ADMIN (1) geändert worden sein
 
 ```sh
-curl -u admin@admin.ch:12345678 -X POST -H 'Content-Type: application/json' -d '{
+curl -u admin@admin.ch:12345678 -X PATCH -H 'Content-Type: application/json' -d '{
  "description": "Das ist die neue und ausführlichere Beschreibung für das Produkt 1"
 }' http://localhost:8080/api/product/update/1
 ```
