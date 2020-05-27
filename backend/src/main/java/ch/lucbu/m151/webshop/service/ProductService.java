@@ -26,7 +26,7 @@ public class ProductService {
         .collect(Collectors.toList());
   }
 
-  private Product getProductByNumber(Long number) {
+  Product getProductByNumber(Long number) {
     Optional<Product> productOpt = productRepository.findByNumber(number);
     productOpt.orElseThrow(() -> new WebshopException("product not found"));
     return productOpt.get();
