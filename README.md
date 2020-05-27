@@ -126,7 +126,7 @@ curl -u lucbu01@bluewin.ch:12345678 http://localhost:8080/api/user/info
 - Die Rolle des Users muss auf der Datenbank auf ADMIN (1) geändert worden sein
 
 ```sh
-curl -u lucbu01@bluewin.ch:12345678 -x POST -d '{
+curl -u admin@admin.ch:12345678 -X POST --header 'Content-Type: application/json' -d '{
  "name": "Samsung Galaxy S20",
  "description": "Das neuste",
  "price": "799.90"
@@ -147,4 +147,16 @@ Produkt muss schon erstellt worden sein
 
 ```sh
 curl localhost:8080/api/product/get/1
+```
+
+### Produkt ändern
+
+- Produkt muss schon erstellt worden sein
+- User muss schon erstellt worden sein mit entsprechenden Passwort
+- Die Rolle des Users muss auf der Datenbank auf ADMIN (1) geändert worden sein
+
+```sh
+curl -u admin@admin.ch:12345678 -X POST --header 'Content-Type: application/json' -d '{
+ "description": "Das ist die neue und ausführlichere Beschreibung für das Produkt 1"
+}' http://localhost:8080/api/product/update/1
 ```

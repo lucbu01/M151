@@ -49,12 +49,14 @@ public class ProductService {
   }
 
   public void update(Long number, ProductDto dto) {
-    dto.validate();
     Product product = getProductByNumber(number);
-    if (dto.getName() != null) {
+    ProductDto productDto = new ProductDto(product, true);
+    productDto.expand(dto);
+    productDto.validate();
+    if (dto.getName() != null && !dto.getName().isBlank()) {
       product.setName(dto.getName());
     }
-    if (dto.getDescription() != null) {
+    if (dto.getDescription() != null && !dto.getDescription().isBlank()) {
       product.setDescription(dto.getDescription());
     }
     if (dto.getPrice() != null) {

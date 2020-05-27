@@ -36,4 +36,10 @@ public class ProductController {
   public ProductDto get(@PathVariable Long number) throws Exception {
     return productService.getByNumber(number);
   }
+
+  @PostMapping("/update/{number}")
+  @ResponseStatus(code = HttpStatus.OK)
+  public void create(@PathVariable Long number, @RequestBody ProductDto productDto) throws Exception {
+    productService.update(number, productDto);
+  }
 }

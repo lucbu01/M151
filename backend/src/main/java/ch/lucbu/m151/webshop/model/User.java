@@ -1,6 +1,6 @@
 package ch.lucbu.m151.webshop.model;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -121,7 +121,8 @@ public class User implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    List<GrantedAuthority> auths = Arrays.asList(new StringAuthority("ROLE_" + role.toString()));
+    List<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
+    auths.add(new StringAuthority("ROLE_" + role.toString()));
     if (role == UserRole.ADMIN) {
       auths.add(new StringAuthority("ROLE_USER"));
     }

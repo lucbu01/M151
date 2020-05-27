@@ -1,5 +1,6 @@
 package ch.lucbu.m151.webshop.model.dto;
 
+import java.lang.reflect.Field;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -18,5 +19,20 @@ public abstract class Dto {
       throw new ValidationException(validations);
     }
     return true;
+  }
+
+  public void expand(Dto dto) {
+    Class<? extends Dto> dtoClass = getClass();
+    if (dtoClass.equals(dto.getClass())) {
+      for (Field field : dtoClass.getFields()) {
+        try {
+          if (field.get(dto) != null) {
+            field.set(this, field.get(dto));
+          }
+        } catch (IllegalArgumentException | IllegalAccessException e) {
+          return;
+        }
+      }
+    }
   }
 }
