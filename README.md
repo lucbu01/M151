@@ -178,3 +178,47 @@ curl -u admin@admin.ch:12345678 -X PATCH -H 'Content-Type: application/json' -d 
 ```sh
 curl -u admin@admin.ch:12345678 -X DELETE  http://localhost:8080/api/product/delete/1
 ```
+
+### Produkt in Warenkorb legen
+
+- Produkt mit der Nummer 1 muss schon erstellt worden sein
+- User muss schon erstellt worden sein mit entsprechenden Passwort
+
+```sh
+curl -u lucbu01@bluewin.ch:12345678 -X PUT http://localhost:8080/api/cart/add/1
+```
+
+### Warenkorb anzeigen
+
+- User muss schon erstellt worden sein mit entsprechenden Passwort
+
+```sh
+curl -u lucbu01@bluewin.ch:12345678 http://localhost:8080/api/cart/get
+```
+
+### Produkt aus Warenkorb entfernen
+
+- Produkt mit der Nummer 1 muss schon erstellt worden sein
+- User muss schon erstellt worden sein mit entsprechenden Passwort
+
+```sh
+curl -u lucbu01@bluewin.ch:12345678 -X DELETE http://localhost:8080/api/cart/remove/1
+```
+
+### Produkt Anzahl im Warenkorb setzen
+
+- Produkt mit der Nummer 1 muss schon erstellt worden sein
+- User muss schon erstellt worden sein mit entsprechenden Passwort
+
+```sh
+curl -u lucbu01@bluewin.ch:12345678 -X PUT http://localhost:8080/api/cart/add/1/10
+```
+
+### Ganze Position eines Produktes aus dem Warenkorb entfernen
+
+- Produkt mit der Nummer 1 muss schon erstellt worden sein
+- User muss schon erstellt worden sein mit entsprechenden Passwort
+
+```sh
+curl -u lucbu01@bluewin.ch:12345678 -X DELETE http://localhost:8080/api/cart/remove/1/all
+```
