@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity(name = "custoper_order_position")
+@Entity(name = "customer_order_position")
 public class OrderPosition {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
