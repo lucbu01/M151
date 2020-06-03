@@ -1,13 +1,12 @@
 package ch.lucbu.m151.webshop.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-@Entity
+@Entity(name = "customer_order")
 public class Order {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,14 +27,22 @@ public class Order {
   @JoinColumn(nullable = false)
   private User user;
 
-  @Column(nullable = false)
-  @Enumerated(EnumType.ORDINAL)
-  private OrderStatus status;
-
   @OneToMany(mappedBy = "order")
   private List<OrderPosition> positions = new ArrayList<OrderPosition>();
 
+  @Column(nullable = false)
+  private LocalDateTime created = LocalDateTime.now();
+
+  private LocalDateTime ordered;
+
+  private LocalDateTime sent;
+
   public Order() {
+  }
+
+  public Order(User user, Long number) {
+    this.user = user;
+    this.number = number;
   }
 
   public UUID getId() {
@@ -63,11 +70,7 @@ public class Order {
   }
 
   public OrderStatus getStatus() {
-    return status;
-  }
-
-  public void setStatus(OrderStatus status) {
-    this.status = status;
+    return sent != null ? OrderStatus.SENT : ordered != null ? OrderStatus.ORDERED : OrderStatus.OPEN;
   }
 
   public List<OrderPosition> getPositions() {
@@ -76,5 +79,33 @@ public class Order {
 
   public void setPositions(List<OrderPosition> positions) {
     this.positions = positions;
+  }
+
+  public LocalDateTime getCreated() {
+    return created;
+  }
+
+  public void setCreated(LocalDateTime created) {
+    this.created = created;
+  }
+
+  public LocalDateTime getOrdered() {
+    return ordered;
+  }
+
+  public void order() {
+    this.ordered = LocalDateTime.now();
+  }
+
+  public LocalDateTime getSent() {
+    return sent;
+  }
+
+  public void sent() {
+    this.sent = LocalDateTime.now();
+  }
+
+  public LocalDateTime getUpdated() {
+    return sent != null ? sent : ordered != null ? ordered : created;
   }
 }

@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ch.lucbu.m151.webshop.exception.WebshopException;
+import ch.lucbu.m151.webshop.exception.NotFoundException;
 import ch.lucbu.m151.webshop.model.Product;
 import ch.lucbu.m151.webshop.model.dto.ProductDto;
 import ch.lucbu.m151.webshop.repository.ProductRepository;
@@ -28,7 +28,7 @@ public class ProductService {
 
   Product getProductByNumber(Long number) {
     Optional<Product> productOpt = productRepository.findByNumber(number);
-    productOpt.orElseThrow(() -> new WebshopException("product not found"));
+    productOpt.orElseThrow(() -> new NotFoundException());
     return productOpt.get();
   }
 

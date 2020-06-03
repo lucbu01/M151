@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ch.lucbu.m151.webshop.exception.WebshopException;
 import ch.lucbu.m151.webshop.model.Cart;
 import ch.lucbu.m151.webshop.model.CartPosition;
 import ch.lucbu.m151.webshop.model.Product;
@@ -68,6 +69,14 @@ public class CartService {
   public CartDto get(User user) {
     Cart cart = cartRepository.findByUser(user).orElse(new Cart(user));
     return new CartDto(cart);
+  }
+
+  public Cart getCart(User user) {
+    Cart cart = cartRepository.findByUser(user).orElseThrow(() -> new WebshopException("Dein Warenkorb ist leer!"));
+    if (cart.getPositions().isEmpty()) {
+      throw new WebshopException("Dein Warenkorb ist leer!");
+    }
+    return cart;
   }
 
 }
