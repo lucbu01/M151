@@ -19,7 +19,7 @@ public class Cart {
   private UUID id;
 
   @ManyToOne
-  @JoinColumn(unique = true)
+  @JoinColumn(unique = true, nullable = false)
   private User user;
 
   @OneToMany(mappedBy = "cart")
