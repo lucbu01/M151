@@ -65,4 +65,14 @@ public class CartPosition {
     this.count = count;
   }
 
+  public void increase() {
+    this.count++;
+  }
+
+  public void decrease() {
+    if (this.count > 0) {
+      this.count--;
+    }
+  }
+
 }

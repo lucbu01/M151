@@ -22,7 +22,7 @@ public class Cart {
   @JoinColumn(unique = true)
   private User user;
 
-  @OneToMany
+  @OneToMany(mappedBy = "cart")
   private List<CartPosition> positions = new ArrayList<CartPosition>();
 
   public Cart() {

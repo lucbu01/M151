@@ -1,6 +1,7 @@
 package ch.lucbu.m151.webshop.service;
 
 import java.util.NoSuchElementException;
+import java.util.function.Consumer;
 
 import javax.transaction.Transactional;
 
@@ -28,35 +29,44 @@ public class CartService {
   @Autowired
   ProductService productService;
 
-  public CartDto add(Long productNumber, User user) {
+  private void set(Long productNumber, User user, Consumer<CartPosition> func) {
     Cart cart = cartRepository.findByUser(user).orElse(new Cart(user));
     cartRepository.saveAndFlush(cart);
     CartPosition position;
     try {
       position = cart.getPositions().stream().filter(pos -> pos.getProduct().getNumber() == productNumber).findFirst()
           .get();
-      position.setCount(position.getCount() + 1);
+      func.accept(position);
     } catch (NoSuchElementException e) {
       Product product = productService.getProductByNumber(productNumber);
-      position = new CartPosition(cart, product, 1);
+      position = new CartPosition(cart, product, 0);
+      func.accept(position);
     }
-    cartPositionRepository.save(position);
-    return new CartDto(cart);
+    if (position.getCount() > 0) {
+      cartPositionRepository.save(position);
+    } else {
+      cartPositionRepository.delete(position);
+    }
   }
 
-  public CartDto set(Long productNumber, Integer count, User user) {
+  public void add(Long productNumber, User user) {
+    set(productNumber, user, pos -> pos.increase());
+  }
+
+  public void remove(Long productNumber, User user) {
+    set(productNumber, user, pos -> pos.decrease());
+  }
+
+  public void removeAll(Long productNumber, User user) {
+    set(productNumber, user, pos -> pos.setCount(0));
+  }
+
+  public void set(Long productNumber, Integer count, User user) {
+    set(productNumber, user, pos -> pos.setCount(count));
+  }
+
+  public CartDto get(User user) {
     Cart cart = cartRepository.findByUser(user).orElse(new Cart(user));
-    cartRepository.saveAndFlush(cart);
-    CartPosition position;
-    try {
-      position = cart.getPositions().stream().filter(pos -> pos.getProduct().getNumber() == productNumber).findFirst()
-          .get();
-      position.setCount(count);
-    } catch (NoSuchElementException e) {
-      Product product = productService.getProductByNumber(productNumber);
-      position = new CartPosition(cart, product, count);
-    }
-    cartPositionRepository.save(position);
     return new CartDto(cart);
   }
 

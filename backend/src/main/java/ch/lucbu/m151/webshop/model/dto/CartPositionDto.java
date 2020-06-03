@@ -1,5 +1,7 @@
 package ch.lucbu.m151.webshop.model.dto;
 
+import java.math.BigDecimal;
+
 import ch.lucbu.m151.webshop.model.CartPosition;
 
 public class CartPositionDto extends Dto {
@@ -8,12 +10,15 @@ public class CartPositionDto extends Dto {
 
   private Integer count;
 
+  private BigDecimal total;
+
   public CartPositionDto() {
   }
 
   public CartPositionDto(CartPosition cartPosition) {
     this.product = new ProductDto(cartPosition.getProduct(), false);
     this.count = cartPosition.getCount();
+    this.total = this.product.getPrice().multiply(new BigDecimal(this.count));
   }
 
   public ProductDto getProduct() {
@@ -30,5 +35,13 @@ public class CartPositionDto extends Dto {
 
   public void setCount(Integer count) {
     this.count = count;
+  }
+
+  public void setTotal(BigDecimal total) {
+    this.total = total;
+  }
+
+  public BigDecimal getTotal() {
+    return total;
   }
 }
