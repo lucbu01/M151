@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,24 @@ public class OrderService {
   OrderPositionRepository orderPositionRepository;
 
   @Autowired
+  EntityManager entityManager;
+
+  @Autowired
   CartService cartService;
+
+  private void delete(Order order) {
+    for (OrderPosition pos : order.getPositions()) {
+      orderPositionRepository.delete(pos);
+    }
+    orderRepository.delete(order);
+    orderPositionRepository.flush();
+    orderRepository.flush();
+  }
 
   public OrderDto orderPreview(User user) {
     Optional<Order> currentOrderPreview = orderRepository.findByUserAndOrderedIsNull(user);
     if (currentOrderPreview.isPresent()) {
-      orderRepository.delete(currentOrderPreview.get());
+      delete(currentOrderPreview.get());
     }
 
     Cart cart = cartService.getCart(user);
@@ -52,6 +65,7 @@ public class OrderService {
       orderPositionRepository.save(new OrderPosition(order, position.getProduct(), position.getCount()));
     }
     orderPositionRepository.flush();
+    entityManager.clear();
     return new OrderDto(orderRepository.findByUserAndOrderedIsNull(user).get());
   }
 
@@ -59,21 +73,22 @@ public class OrderService {
     Order currentOrderPreview = orderRepository.findByUserAndOrderedIsNull(user)
         .orElseThrow(() -> new WebshopException("Es ist keine Bestellungsvorschau vorhanden!"));
     if (LocalDateTime.now().minus(10, ChronoUnit.MINUTES).compareTo(currentOrderPreview.getCreated()) > 0) {
-      this.orderRepository.delete(currentOrderPreview);
+      delete(currentOrderPreview);
       throw new WebshopException("Die Bestellungsvorschau von 10 Minuten ist abgelaufen!");
     }
 
     currentOrderPreview.order();
     orderRepository.save(currentOrderPreview);
+    cartService.clear(user);
     return new OrderDto(currentOrderPreview);
   }
 
-  public List<OrderListPreviewDto> myOpenOrders(User user) {
+  public List<OrderListPreviewDto> openOrders(User user) {
     return orderRepository.findByUserAndOrderedIsNotNullAndSentIsNullOrderByOrdered(user).stream()
         .map(order -> new OrderListPreviewDto(order)).collect(Collectors.toList());
   }
 
-  public List<OrderListPreviewDto> mySentOrders(User user) {
+  public List<OrderListPreviewDto> sentOrders(User user) {
     return orderRepository.findByUserAndOrderedIsNotNullAndSentIsNotNullOrderBySent(user).stream()
         .map(order -> new OrderListPreviewDto(order)).collect(Collectors.toList());
   }

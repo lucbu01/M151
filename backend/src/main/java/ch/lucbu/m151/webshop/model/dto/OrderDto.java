@@ -1,6 +1,7 @@
 package ch.lucbu.m151.webshop.model.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -8,20 +9,25 @@ import java.util.UUID;
 import ch.lucbu.m151.webshop.model.Order;
 import ch.lucbu.m151.webshop.model.OrderPosition;
 import ch.lucbu.m151.webshop.model.OrderStatus;
-import ch.lucbu.m151.webshop.model.User;
 
 public class OrderDto extends Dto {
   private UUID id;
 
   private Long number;
 
-  private User user;
+  private LocalDateTime created;
+
+  private LocalDateTime ordered;
+
+  private LocalDateTime sent;
+
+  private UserDto user;
 
   private OrderStatus status;
 
   private List<OrderPositionDto> positions = new ArrayList<OrderPositionDto>();
 
-  private BigDecimal total;
+  private BigDecimal total = new BigDecimal(0);
 
   public OrderDto() {
   }
@@ -31,6 +37,13 @@ public class OrderDto extends Dto {
       this.positions.add(new OrderPositionDto(position));
     }
     positions.stream().forEach(pos -> this.total = this.total.add(pos.getTotal()));
+    this.id = order.getId();
+    this.number = order.getNumber();
+    this.created = order.getCreated();
+    this.ordered = order.getOrdered();
+    this.sent = order.getSent();
+    this.user = new UserDto(order.getUser());
+    this.status = order.getStatus();
   }
 
   public UUID getId() {
@@ -49,11 +62,35 @@ public class OrderDto extends Dto {
     this.number = number;
   }
 
-  public User getUser() {
+  public LocalDateTime getCreated() {
+    return created;
+  }
+
+  public void setCreated(LocalDateTime created) {
+    this.created = created;
+  }
+
+  public LocalDateTime getOrdered() {
+    return ordered;
+  }
+
+  public void setOrdered(LocalDateTime ordered) {
+    this.ordered = ordered;
+  }
+
+  public LocalDateTime getSent() {
+    return sent;
+  }
+
+  public void setSent(LocalDateTime sent) {
+    this.sent = sent;
+  }
+
+  public UserDto getUser() {
     return user;
   }
 
-  public void setUser(User user) {
+  public void setUser(UserDto user) {
     this.user = user;
   }
 

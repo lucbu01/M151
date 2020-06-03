@@ -1,8 +1,10 @@
 package ch.lucbu.m151.webshop.service;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.function.Consumer;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class CartService {
 
   @Autowired
   CartPositionRepository cartPositionRepository;
+
+  @Autowired
+  EntityManager entityManager;
 
   @Autowired
   ProductService productService;
@@ -68,7 +73,14 @@ public class CartService {
 
   public CartDto get(User user) {
     Cart cart = cartRepository.findByUser(user).orElse(new Cart(user));
-    return new CartDto(cart);
+    for (CartPosition pos : cart.getPositions()) {
+      if (!pos.getProduct().isActive()) {
+        cartPositionRepository.delete(pos);
+      }
+    }
+    cartPositionRepository.flush();
+    entityManager.clear();
+    return new CartDto(cartRepository.findByUser(user).get());
   }
 
   public Cart getCart(User user) {
@@ -76,7 +88,25 @@ public class CartService {
     if (cart.getPositions().isEmpty()) {
       throw new WebshopException("Dein Warenkorb ist leer!");
     }
-    return cart;
+    for (CartPosition pos : cart.getPositions()) {
+      if (!pos.getProduct().isActive()) {
+        cartPositionRepository.delete(pos);
+      }
+    }
+    cartPositionRepository.flush();
+    entityManager.clear();
+    return cartRepository.findByUser(user).get();
   }
 
+  public void clear(User user) {
+    Optional<Cart> cart = cartRepository.findByUser(user);
+    if (cart.isPresent()) {
+      for (CartPosition pos : cart.get().getPositions()) {
+        cartPositionRepository.delete(pos);
+      }
+      cartPositionRepository.flush();
+      cartRepository.delete(cart.get());
+      cartRepository.flush();
+    }
+  }
 }
