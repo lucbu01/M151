@@ -102,11 +102,11 @@ npm run startLocalhost
 
 ## Curl-Beispiele
 
-Backend muss hochgefahren und mit der Datenbank verbunden sein
+- Backend muss hochgefahren und mit der Datenbank verbunden sein
 
 ### User erstellen
 
-E-Mail Adresse darf noch nicht verwendet worden sein
+- E-Mail Adresse darf noch nicht verwendet worden sein
 
 ```sh
 curl -X POST -H 'Content-Type: application/json' -d '{
@@ -122,7 +122,7 @@ curl -X POST -H 'Content-Type: application/json' -d '{
 
 ### User-Info abfragen
 
-User muss schon erstellt worden sein mit entsprechendem Passwort
+- User muss schon erstellt worden sein mit entsprechendem Passwort
 
 ```sh
 curl -u lucbu01@bluewin.ch:12345678 http://localhost:8080/api/user/info
@@ -143,7 +143,7 @@ curl -u admin@admin.ch:12345678 -X POST -H 'Content-Type: application/json' -d '
 
 ### Produkte auflisten
 
-Beschreibung wird nicht angezeigt
+- Beschreibung wird nicht angezeigt
 
 ```sh
 curl localhost:8080/api/product/list
@@ -151,7 +151,7 @@ curl localhost:8080/api/product/list
 
 ### Produkt ansehen
 
-Produkt muss schon erstellt worden sein
+- Produkt muss schon erstellt worden sein
 
 ```sh
 curl localhost:8080/api/product/get/1
