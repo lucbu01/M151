@@ -69,7 +69,7 @@ public class Order {
   }
 
   public OrderStatus getStatus() {
-    return sent != null ? OrderStatus.SENT : ordered != null ? OrderStatus.ORDERED : OrderStatus.OPEN;
+    return sent != null ? OrderStatus.SENT : ordered != null ? OrderStatus.ORDERED : OrderStatus.PREVIEW;
   }
 
   public List<OrderPosition> getPositions() {
