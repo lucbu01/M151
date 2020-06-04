@@ -80,7 +80,7 @@ public class CartService {
     }
     cartPositionRepository.flush();
     entityManager.clear();
-    return new CartDto(cartRepository.findByUser(user).get());
+    return new CartDto(cartRepository.findByUser(user).orElse(new Cart(user)));
   }
 
   public Cart getCart(User user) {

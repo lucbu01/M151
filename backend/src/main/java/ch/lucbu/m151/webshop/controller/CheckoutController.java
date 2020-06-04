@@ -1,10 +1,13 @@
 package ch.lucbu.m151.webshop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.lucbu.m151.webshop.model.User;
@@ -20,6 +23,12 @@ public class CheckoutController {
   @GetMapping("/preview")
   public OrderDto orderPreview(Authentication auth) {
     return orderService.orderPreview((User) auth.getPrincipal());
+  }
+
+  @DeleteMapping("/cancel")
+  @ResponseStatus(code = HttpStatus.OK)
+  public void cancelOrderPreview(Authentication auth) {
+    orderService.cancelOrderPreview((User) auth.getPrincipal());
   }
 
   @PostMapping("/order")

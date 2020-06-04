@@ -69,6 +69,13 @@ public class OrderService {
     return new OrderDto(orderRepository.findByUserAndOrderedIsNull(user).get());
   }
 
+  public void cancelOrderPreview(User user) {
+    Optional<Order> currentOrderPreview = orderRepository.findByUserAndOrderedIsNull(user);
+    if (currentOrderPreview.isPresent()) {
+      delete(currentOrderPreview.get());
+    }
+  }
+
   public OrderDto order(User user) {
     Order currentOrderPreview = orderRepository.findByUserAndOrderedIsNull(user)
         .orElseThrow(() -> new WebshopException("Es ist keine Bestellungsvorschau vorhanden!"));
