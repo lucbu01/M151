@@ -181,7 +181,7 @@ curl -u admin@admin.ch:12345678 -X DELETE  http://localhost:8080/api/product/del
 
 ### Produkt in Warenkorb legen
 
-- Produkt mit der Nummer 1 muss schon erstellt worden sein
+- Produkt muss schon erstellt worden sein
 - User muss schon erstellt worden sein mit entsprechenden Passwort
 
 ```sh
@@ -198,7 +198,7 @@ curl -u lucbu01@bluewin.ch:12345678 http://localhost:8080/api/cart/get
 
 ### Produkt aus Warenkorb entfernen
 
-- Produkt mit der Nummer 1 muss schon erstellt worden sein
+- Produkt muss schon erstellt worden sein
 - User muss schon erstellt worden sein mit entsprechenden Passwort
 
 ```sh
@@ -207,7 +207,7 @@ curl -u lucbu01@bluewin.ch:12345678 -X DELETE http://localhost:8080/api/cart/rem
 
 ### Produkt Anzahl im Warenkorb setzen
 
-- Produkt mit der Nummer 1 muss schon erstellt worden sein
+- Produkt muss schon erstellt worden sein
 - User muss schon erstellt worden sein mit entsprechenden Passwort
 
 ```sh
@@ -216,9 +216,77 @@ curl -u lucbu01@bluewin.ch:12345678 -X PUT http://localhost:8080/api/cart/add/1/
 
 ### Ganze Position eines Produktes aus dem Warenkorb entfernen
 
-- Produkt mit der Nummer 1 muss schon erstellt worden sein
+- Produkt muss schon erstellt worden sein
 - User muss schon erstellt worden sein mit entsprechenden Passwort
 
 ```sh
 curl -u lucbu01@bluewin.ch:12345678 -X DELETE http://localhost:8080/api/cart/remove/1/all
+```
+
+### Bestellvorschau
+
+- Warenkorb enthält mindestens eine Position
+
+Bevor eine Bestellung definitiv bestellt werden kann, muss man sich zuerst eine Bestellvorschau anzeigen lassen. Diese Abfrage speichert die Bestellung mit den aktuellsten Preisen und zeigt sie an. Die Bestellung hat aber noch nicht den Status "BESTELLT". Die Bestellvorschau mit den gespeicherten Preisen ist ab dem Zeitpunkt 10 Minuten gültig. Das heisst, sie muss innert 10 Minuten bestellt werden.
+
+```sh
+curl -u lucbu01@bluewin.ch:12345678 http://localhost:8080/api/checkout/preview
+```
+
+### Bestellvorschau abbrechen
+
+Ist man mit der Bestellung noch nicht ganz zufrieden, kann man sie abbrechen, wenn sie noch den Status "VORSCHAU" hat.
+
+- Bestellvorschau muss gemacht worden sein
+
+```sh
+curl -u lucbu01@bluewin.ch:12345678 -X DELETE http://localhost:8080/api/checkout/cancel
+```
+
+### Bestellung abschliessen
+
+Hat man die Bestellvorschau gesehen und ist zufrieden, kann man die Bestellung abschliessen.
+
+- Bestellvorschau muss vor weniger als 10 Minuten gemacht worden sein
+
+```sh
+curl -u lucbu01@bluewin.ch:12345678 -X POST http://localhost:8080/api/checkout/order
+```
+
+### Offene Bestellungen anzeigen
+
+```sh
+curl -u lucbu01@bluewin.ch:12345678 http://localhost:8080/api/order/open
+```
+
+### Verschickte Bestellungen anzeigen
+
+```sh
+curl -u lucbu01@bluewin.ch:12345678 http://localhost:8080/api/order/sent
+```
+
+### Details einer Bestellung anzeigen
+
+- Die Bestellung muss existieren
+- Bestellung muss von dem User gemacht worden sein oder der User muss ein Admin sein
+
+```sh
+curl -u lucbu01@bluewin.ch:12345678 http://localhost:8080/api/order/details/1
+```
+
+### Alle offenen Bestellungen anzeigen
+
+- User muss ein Admin sein
+
+```sh
+curl -u admin@admin.ch:12345678 http://localhost:8080/api/order/admin/open
+```
+
+### Bestellstatus auf "VERSCHICKT" ändern
+
+- Die Bestellung muss existieren
+- User muss ein Admin sein
+
+```sh
+curl -u admin@admin.ch:12345678 http://localhost:8080/api/order/admin/sent/1
 ```
