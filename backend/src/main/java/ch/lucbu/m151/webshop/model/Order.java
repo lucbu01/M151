@@ -20,7 +20,7 @@ public class Order {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private UUID id;
 
-  @Column(unique = true, nullable = false)
+  @Column(unique = true)
   private Long number;
 
   @ManyToOne
@@ -40,9 +40,8 @@ public class Order {
   public Order() {
   }
 
-  public Order(User user, Long number) {
+  public Order(User user) {
     this.user = user;
-    this.number = number;
   }
 
   public UUID getId() {
@@ -93,8 +92,9 @@ public class Order {
     return ordered;
   }
 
-  public void order() {
+  public void order(Long number) {
     this.ordered = LocalDateTime.now();
+    this.number = number;
   }
 
   public LocalDateTime getSent() {

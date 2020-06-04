@@ -14,7 +14,7 @@ import ch.lucbu.m151.webshop.model.User;
 public interface OrderRepository extends JpaRepository<Order, UUID> {
   Optional<Order> findByNumber(Long number);
 
-  Optional<Order> findTopByOrderByNumberDesc();
+  Optional<Order> findTopByNumberIsNotNullOrderByNumberDesc();
 
   Optional<Order> findByUserAndOrderedIsNull(User user);
 

@@ -57,9 +57,7 @@ public class OrderService {
     }
 
     Cart cart = cartService.getCart(user);
-    Optional<Order> highestNumberedOrder = orderRepository.findTopByOrderByNumberDesc();
-    Long number = highestNumberedOrder.isPresent() ? highestNumberedOrder.get().getNumber() + 1 : 1;
-    Order order = new Order(user, number);
+    Order order = new Order(user);
     orderRepository.saveAndFlush(order);
     for (CartPosition position : cart.getPositions()) {
       orderPositionRepository.save(new OrderPosition(order, position.getProduct(), position.getCount()));
@@ -84,7 +82,9 @@ public class OrderService {
       throw new WebshopException("Die Bestellungsvorschau von 10 Minuten ist abgelaufen!");
     }
 
-    currentOrderPreview.order();
+    Optional<Order> highestNumberedOrder = orderRepository.findTopByNumberIsNotNullOrderByNumberDesc();
+    Long number = highestNumberedOrder.isPresent() ? highestNumberedOrder.get().getNumber() + 1 : 1;
+    currentOrderPreview.order(number);
     orderRepository.save(currentOrderPreview);
     cartService.clear(user);
     return new OrderDto(currentOrderPreview);
