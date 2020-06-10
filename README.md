@@ -91,6 +91,8 @@ Ordner: ~/backend
 ./gradlew bootRun
 ```
 
+Backend läuft auf `http://localhost:8080`
+
 ### Frontend
 
 Ordner: ~/frontend
@@ -99,6 +101,8 @@ Ordner: ~/frontend
 npm install
 npm run start:localhost
 ```
+
+Frontend läuft auf `http://localhost:4200`
 
 ## Curl-Beispiele
 

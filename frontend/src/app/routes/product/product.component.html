@@ -1,0 +1,10 @@
+<div *ngIf="product" class="main">
+    <h1>{{ product.name }}</h1>
+    <p>Artikelnummer: {{ product.number }}</p>
+    <p>{{ product.description }}</p>
+    <h2>{{ product.price }}</h2>
+    <div class="actions">
+        <button mat-fab matTooltip="in den Warenkorb" color="primary"><mat-icon>add_shopping_cart</mat-icon></button>
+        <button mat-fab matTooltip="zurück" routerLink="/"><mat-icon>arrow_back</mat-icon></button>
+    </div>
+</div>
