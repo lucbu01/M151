@@ -97,7 +97,7 @@ Ordner: ~/frontend
 
 ```sh
 npm install
-npm run startLocalhost
+npm run start:localhost
 ```
 
 ## Curl-Beispiele
