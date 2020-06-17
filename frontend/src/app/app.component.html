@@ -2,7 +2,8 @@
   <span>Webshop</span>
   <div class="spacer"></div>
   <button mat-icon-button matTooltip="Übersicht" routerLink="/"><mat-icon>home</mat-icon></button>
-  <button mat-icon-button matTooltip="Warenkorb"><mat-icon>shopping_cart</mat-icon></button>
-  <button mat-icon-button matTooltip="User"><mat-icon>person</mat-icon></button>
+  <button *ngIf="userService.isAdmin()" mat-icon-button matTooltip="Offene Bestellungen" routerLink="/admin/orders"><mat-icon>assignment</mat-icon></button>
+  <button mat-icon-button matTooltip="Warenkorb" routerLink="/cart"><mat-icon>shopping_cart</mat-icon></button>
+  <button mat-icon-button [matTooltip]="userService.isLoggedIn() ? 'Benutzer' : 'Anmelden'" [routerLink]="userService.isLoggedIn() ? '/user' : '/login'"><mat-icon>person</mat-icon></button>
 </mat-toolbar>
 <router-outlet></router-outlet>

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-product',
@@ -18,7 +19,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.productService.getProductByNumber(productNumber).subscribe(product => this.product = product);
   }
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService, protected userService: UserService) { }
 
   ngOnInit(): void {
     this.subscriptions = [

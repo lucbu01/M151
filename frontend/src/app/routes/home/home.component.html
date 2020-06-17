@@ -8,6 +8,7 @@
                 <button mat-icon-button matTooltip="Details ansehen" [routerLink]="'/product/' + product.number">
                     <mat-icon>visibility</mat-icon>
                 </button>
+                <button *ngIf="userService.isAdmin()" mat-flat-button matTooltip="Bearbeiten" routerLink="/"><mat-icon>settings</mat-icon></button>
             </mat-card-actions>
         </mat-card>
     </div>
