@@ -19,16 +19,19 @@ export class OrderService {
   }
 
   getOrderDetails(orderNumber: number): any {
-    return this.http.get(`/api/order/details/${orderNumber}`);
+    return this.http.get(`/api/order/details/${orderNumber}`, { headers: { 'X-Requested-With': 'XMLHttpRequest' }});
   }
 
   getAllOpenOrders(): Observable<any[]> {
     return this.http.get<any[]>('/api/order/admin/open', { headers: { 'X-Requested-With': 'XMLHttpRequest' }});
   }
 
-  setOrderStatusSent(orderNumber: number) {
-    this.http.get(`/api/order/admin/sent/${orderNumber}`).subscribe(
-      () => this.snack.open('Bestellstatus wurde auf VERSCHICKT geändert', undefined, { duration: 5000 }),
+  setOrderStatusSent(orderNumber: number, callback: () => void) {
+    this.http.put(`/api/order/admin/sent/${orderNumber}`, {}, { headers: { 'X-Requested-With': 'XMLHttpRequest' }}).subscribe(
+      () => {
+        this.snack.open('Bestellstatus wurde auf VERSCHICKT geändert', undefined, { duration: 5000 })
+        callback();
+      },
       error => this.snack.open(error.error.message, undefined, { duration: 5000 })
     );
   }

@@ -13,7 +13,7 @@ export class CartService {
   onChange = new EventEmitter();
 
   add(productNumber: number) {
-    this.http.put(`/api/cart/add/${productNumber}`,  { headers: { 'X-Requested-With': 'XMLHttpRequest' }}).subscribe(
+    this.http.put(`/api/cart/add/${productNumber}`, {}, { headers: { 'X-Requested-With': 'XMLHttpRequest' }}).subscribe(
       () => {
         this.snack.open('Das Produkt wurde dem Warenkorb hinzugefügt', undefined, { duration: 5000 });
         this.detectChanged();
@@ -40,7 +40,7 @@ export class CartService {
   }
 
   set(productNumber: number, count: number) {
-    this.http.put(`/api/cart/set/${productNumber}/${count}`,  { headers: { 'X-Requested-With': 'XMLHttpRequest' }}).subscribe(
+    this.http.put(`/api/cart/set/${productNumber}/${count}`, {}, { headers: { 'X-Requested-With': 'XMLHttpRequest' }}).subscribe(
       () => {
         this.snack.open('Die Anzahl einer Position wurde geändert', undefined, { duration: 5000 });
         this.detectChanged();

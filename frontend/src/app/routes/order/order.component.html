@@ -1,0 +1,64 @@
+<div class="main">
+    <mat-card *ngIf="order">
+        <mat-card-title>Bestellung Detail</mat-card-title>
+        <mat-card-subtitle>Bestellnummer: {{ order.number }}</mat-card-subtitle>
+        <mat-card-content>
+            <h2>Status</h2>
+                    <p *ngIf="order.ordered">
+                        Die Bestellung wurde am {{ order.ordered | date : 'dd.MM.yyyy' }} um {{ order.ordered | date : 'HH:mm' }} Uhr aufgegeben
+                        <ng-container *ngIf="order.sent">
+                            und am {{ order.sent | date : 'dd.MM.yyyy' }} um {{ order.sent | date : 'HH:mm' }} Uhr verschickt.
+                        </ng-container>
+                        <ng-container *ngIf="!order.sent">
+                            und wurde noch nicht verschickt. <br>
+                            Wir werden uns so bald wie möglich um Ihre Bestellung kümmern.
+                        </ng-container>
+                    </p>
+                    <p *ngIf="!order.ordered">
+                        Die Bestellung wurde noch nicht aufgegeben.
+                    </p>
+            <h2>Adresse</h2>
+            <p>
+                {{ order.user.firstName }} {{ order.user.lastName }} <br>
+                {{ order.user.street }} <br>
+                {{ order.user.postalCode }} {{ order.user.city }} <br>
+                {{ order.user.email }}
+            </p>
+            <h2>Positionen</h2>
+            <table mat-table [dataSource]="order.positions">
+                <ng-container matColumnDef="productNumber">
+                    <th mat-header-cell *matHeaderCellDef> Artikelnr. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.productNumber}} </td>
+                    <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
+                </ng-container>
+                <ng-container matColumnDef="productName">
+                    <th mat-header-cell *matHeaderCellDef> Artikel </th>
+                    <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="productPrice">
+                    <th mat-header-cell *matHeaderCellDef> Preis Einzeln </th>
+                    <td mat-cell *matCellDef="let element"> CHF {{element.productPrice | number : '1.2-2' : 'de-CH'}} </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="count">
+                    <th mat-header-cell *matHeaderCellDef> Anzahl </th>
+                    <td mat-cell *matCellDef="let element"> {{element.count}} </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="totalPrice">
+                    <th mat-header-cell *matHeaderCellDef> Preis Total </th>
+                    <td mat-cell *matCellDef="let element"> CHF {{element.total | number : '1.2-2' : 'de-CH'}} </td>
+                    <td mat-footer-cell *matFooterCellDef><b>CHF {{order.total | number : '1.2-2' : 'de-CH'}}</b></td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+            </table>
+        </mat-card-content>
+        <mat-card-actions *ngIf="!order.sent && userService.isAdmin()">
+            <button mat-flat-button color="primary" (click)="setOrderStatusSent()">Bestellung als gesendet markieren</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

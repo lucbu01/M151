@@ -10,17 +10,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CheckoutComponent implements OnInit {
 
-  finalOrder = false;
   order: any;
   displayedColumns = [ 'productNumber', 'productName', 'productPrice', 'count', 'totalPrice' ];
 
   constructor(private checkoutService: CheckoutService, private router: Router, private snack: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.checkoutService.checkoutPreview().subscribe(orderPreview => {
-      this.order = orderPreview;
-      this.finalOrder = false;
-    }, error => {
+    this.checkoutService.checkoutPreview().subscribe(orderPreview => this.order = orderPreview, error => {
       this.snack.open(error.error.message, undefined, { duration: 5000 });
       this.router.navigateByUrl('/');
     });
@@ -32,9 +28,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   orderCheckoutPreview() {
-    this.checkoutService.orderCheckoutPreview().subscribe(orderPreview => {
-      this.order = orderPreview;
-      this.finalOrder = true;
+    this.checkoutService.orderCheckoutPreview().subscribe(order => {
+      this.order = order;
+      this.router.navigateByUrl(`/order/${order.number}`);
     }, error => {
       this.snack.open(error.error.message, undefined, { duration: 5000 });
     });

@@ -1,6 +1,6 @@
 <div class="main">
     <mat-card>
-        <mat-card-title>{{ finalOrder ? 'Abgeschlossene Bestellung' : 'Bestellvorschau' }}</mat-card-title>
+        <mat-card-title>Bestellvorschau</mat-card-title>
         <ng-container *ngIf="order">
             <mat-card-subtitle *ngIf="order.number">Bestellnummer: {{ order.number }}</mat-card-subtitle>
             <mat-card-content>
@@ -43,11 +43,8 @@
                 </table>
             </mat-card-content>
             <mat-card-actions>
-                <ng-container *ngIf="!finalOrder">
-                    <button mat-flat-button color="primary" (click)="orderCheckoutPreview()">Bestellung abschicken</button>
-                    <button mat-flat-button color="warn" (click)="cancelCheckoutPreview()">Bestellvorschau abbrechen</button>
-                </ng-container>
-                <button *ngIf="finalOrder" mat-flat-button color="primary" routerLink="/">Zurück zur Produkteübersicht</button>
+                <button mat-flat-button color="primary" (click)="orderCheckoutPreview()">Bestellung abschicken</button>
+                <button mat-flat-button color="warn" (click)="cancelCheckoutPreview()">Bestellvorschau abbrechen</button>
             </mat-card-actions>
         </ng-container>
     </mat-card>
