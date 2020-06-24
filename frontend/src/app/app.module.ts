@@ -32,6 +32,7 @@ import { CheckoutComponent } from './routes/checkout/checkout.component';
 import { CheckoutService } from './services/checkout.service';
 import { OrderService } from './services/order.service';
 import { OrderComponent } from './routes/order/order.component';
+import { AdminComponent } from './routes/admin/admin.component';
 
 registerLocaleData( localeDeCh, 'de-CH');
 
@@ -45,7 +46,8 @@ registerLocaleData( localeDeCh, 'de-CH');
     UserComponent,
     CartComponent,
     CheckoutComponent,
-    OrderComponent
+    OrderComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

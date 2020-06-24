@@ -18,7 +18,7 @@ export class OrderService {
     return this.http.get<any[]>('/api/order/sent', { headers: { 'X-Requested-With': 'XMLHttpRequest' }});
   }
 
-  getOrderDetails(orderNumber: number): any {
+  getOrderDetails(orderNumber: number): Observable<any> {
     return this.http.get(`/api/order/details/${orderNumber}`, { headers: { 'X-Requested-With': 'XMLHttpRequest' }});
   }
 

@@ -8,6 +8,7 @@ import { UserComponent } from './routes/user/user.component';
 import { CartComponent } from './routes/cart/cart.component';
 import { CheckoutComponent } from './routes/checkout/checkout.component';
 import { OrderComponent } from './routes/order/order.component';
+import { AdminComponent } from './routes/admin/admin.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'user', component: UserComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'order/:number', component: OrderComponent }
+  { path: 'order/:number', component: OrderComponent },
+  { path: 'admin', component: AdminComponent }
 ];
 
 @NgModule({
