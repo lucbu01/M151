@@ -292,5 +292,5 @@ curl -u admin@admin.ch:12345678 http://localhost:8080/api/order/admin/open
 - User muss ein Admin sein
 
 ```sh
-curl -u admin@admin.ch:12345678 http://localhost:8080/api/order/admin/sent/1
+curl -u admin@admin.ch:12345678 -X PUT http://localhost:8080/api/order/admin/sent/1
 ```
