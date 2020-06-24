@@ -10,10 +10,10 @@ import { tap } from 'rxjs/operators';
 })
 export class UserService {
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router) {
+  constructor(private http: HttpClient, private snack: MatSnackBar, private router: Router) {
     this.http.get('/api/user/info', { headers: { 'X-Requested-With': 'XMLHttpRequest' }}).subscribe(info => {
       this.info = info;
-      this.snackBar.open(`Willkommen zurück, ${this.info.firstName}!`, undefined, { duration: 5000 });
+      this.snack.open(`Willkommen zurück, ${this.info.firstName}!`, undefined, { duration: 5000 });
     }, error => this.info = undefined);
   }
 
@@ -34,10 +34,10 @@ export class UserService {
     this.password = password;
     this.http.get('/api/user/info', this.getOptions()).subscribe(info => {
       this.info = info;
-      this.snackBar.open(`Willkommen, ${this.info.firstName}!`, undefined, { duration: 5000 });
+      this.snack.open(`Willkommen, ${this.info.firstName}!`, undefined, { duration: 5000 });
       this.router.navigateByUrl('/user');
     }, error => {
-      this.snackBar.open('Anmeldung fehlgeschlagen', undefined, { duration: 5000 });
+      this.snack.open('Anmeldung fehlgeschlagen', undefined, { duration: 5000 });
       this.info = undefined;
     });
   }
@@ -45,7 +45,7 @@ export class UserService {
   register(postValue: any) {
     this.http.post('/api/user/create', postValue).subscribe(
       successful => this.login(postValue.email, postValue.password),
-      error => this.snackBar.open(error.error.message, undefined, { duration: 5000 }));
+      error => this.snack.open(error.error.message, undefined, { duration: 5000 }));
   }
 
   getInfo(): Observable<any> {
@@ -60,5 +60,14 @@ export class UserService {
         'X-Requested-With': 'XMLHttpRequest'
       }
     };
+  }
+
+  logout() {
+    this.info = undefined;
+    this.email = undefined;
+    this.password = undefined;
+    this.http.get('/api/user/logout', { headers: { 'X-Requested-With': 'XMLHttpRequest' }}).subscribe();
+    this.snack.open('Auf Wiedersehen');
+    this.router.navigateByUrl('/');
   }
 }

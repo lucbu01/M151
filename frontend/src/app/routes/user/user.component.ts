@@ -31,7 +31,7 @@ export class UserComponent implements OnInit {
       );
     }, () => {
       this.snack.open('Sie sind nicht eingeloggt!', undefined, { duration: 5000 });
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/login');
     });
   }
 
