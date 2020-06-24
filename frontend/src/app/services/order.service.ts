@@ -28,8 +28,8 @@ export class OrderService {
 
   setOrderStatusSent(orderNumber: number) {
     this.http.get(`/api/order/admin/sent/${orderNumber}`).subscribe(
-      () => this.snack.open('Bestellstatus wurde auf VERSCHICKT geändert'),
-      error => this.snack.open(error.error.message)
+      () => this.snack.open('Bestellstatus wurde auf VERSCHICKT geändert', undefined, { duration: 5000 }),
+      error => this.snack.open(error.error.message, undefined, { duration: 5000 })
     );
   }
 }

@@ -21,7 +21,7 @@ export class CheckoutComponent implements OnInit {
       this.order = orderPreview;
       this.finalOrder = false;
     }, error => {
-      this.snack.open(error.error.message);
+      this.snack.open(error.error.message, undefined, { duration: 5000 });
       this.router.navigateByUrl('/');
     });
   }
@@ -36,7 +36,7 @@ export class CheckoutComponent implements OnInit {
       this.order = orderPreview;
       this.finalOrder = true;
     }, error => {
-      this.snack.open(error.error.message);
+      this.snack.open(error.error.message, undefined, { duration: 5000 });
     });
   }
 }

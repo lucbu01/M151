@@ -23,14 +23,14 @@ export class UserComponent implements OnInit {
       this.user = info;
       this.orderService.getMyOpenOrders().subscribe(
         openOrders => this.openOrders = openOrders,
-        error => this.snack.open(error.error.message)
+        error => this.snack.open(error.error.message, undefined, { duration: 5000 })
       );
       this.orderService.getMysentOrders().subscribe(
         sentOrders => this.sentOrders = sentOrders,
-        error => this.snack.open(error.error.message)
+        error => this.snack.open(error.error.message, undefined, { duration: 5000 })
       );
     }, () => {
-      this.snack.open('Sie sind nicht eingeloggt!');
+      this.snack.open('Sie sind nicht eingeloggt!', undefined, { duration: 5000 });
       this.router.navigateByUrl('/');
     });
   }

@@ -23,7 +23,7 @@
                     </ng-container>
                     <ng-container matColumnDef="productPrice">
                         <th mat-header-cell *matHeaderCellDef> Preis Einzeln </th>
-                        <td mat-cell *matCellDef="let element"> CHF {{element.productPrice}} </td>
+                        <td mat-cell *matCellDef="let element"> CHF {{element.productPrice | number : '1.2-2' : 'de-CH'}} </td>
                         <td mat-footer-cell *matFooterCellDef></td>
                     </ng-container>
                     <ng-container matColumnDef="count">
@@ -33,8 +33,8 @@
                     </ng-container>
                     <ng-container matColumnDef="totalPrice">
                         <th mat-header-cell *matHeaderCellDef> Preis Total </th>
-                        <td mat-cell *matCellDef="let element"> CHF {{element.total}} </td>
-                        <td mat-footer-cell *matFooterCellDef><b>CHF {{ order.total }}</b></td>
+                        <td mat-cell *matCellDef="let element"> CHF {{element.total | number : '1.2-2' : 'de-CH'}} </td>
+                        <td mat-footer-cell *matFooterCellDef><b>CHF {{order.total | number : '1.2-2' : 'de-CH'}}</b></td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

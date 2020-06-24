@@ -3,7 +3,7 @@
     <div class="products">
         <mat-card *ngFor="let product of products">
             <mat-card-title>{{ product.name }}</mat-card-title>
-            <mat-card-subtitle>{{ product.price }}</mat-card-subtitle>
+            <mat-card-subtitle>CHF {{ product.price | number : '1.2-2' : 'de-CH' }}</mat-card-subtitle>
             <mat-card-actions>
                 <button mat-icon-button matTooltip="Details ansehen" [routerLink]="'/product/' + product.number">
                     <mat-icon>visibility</mat-icon>
