@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, DatePipe } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,7 +32,8 @@ import { CheckoutComponent } from './routes/checkout/checkout.component';
 import { CheckoutService } from './services/checkout.service';
 import { OrderService } from './services/order.service';
 import { OrderComponent } from './routes/order/order.component';
-import { AdminComponent } from './routes/admin/admin.component';
+import { AdminOrdersComponent } from './routes/admin/orders/admin-orders.component';
+import { AdminProductComponent } from './routes/admin/product/admin-product.component';
 
 registerLocaleData( localeDeCh, 'de-CH');
 
@@ -47,7 +48,8 @@ registerLocaleData( localeDeCh, 'de-CH');
     CartComponent,
     CheckoutComponent,
     OrderComponent,
-    AdminComponent
+    AdminOrdersComponent,
+    AdminProductComponent
   ],
   imports: [
     BrowserModule,

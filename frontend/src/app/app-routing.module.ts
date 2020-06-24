@@ -8,7 +8,8 @@ import { UserComponent } from './routes/user/user.component';
 import { CartComponent } from './routes/cart/cart.component';
 import { CheckoutComponent } from './routes/checkout/checkout.component';
 import { OrderComponent } from './routes/order/order.component';
-import { AdminComponent } from './routes/admin/admin.component';
+import { AdminOrdersComponent } from './routes/admin/orders/admin-orders.component';
+import { AdminProductComponent } from './routes/admin/product/admin-product.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,9 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'order/:number', component: OrderComponent },
-  { path: 'admin', component: AdminComponent }
+  { path: 'admin/orders', component: AdminOrdersComponent },
+  { path: 'admin/product', component: AdminProductComponent },
+  { path: 'admin/product/:number', component: AdminProductComponent }
 ];
 
 @NgModule({

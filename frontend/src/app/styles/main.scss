@@ -9,12 +9,26 @@ body {
             margin-bottom: 10px;
         }
 
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
         table {
             width: 100%;
 
             .mat-row:hover  {
                 background-color: whitesmoke;
             }
+        }
+
+        .rightbound {
+            text-align: right;
         }
     }
 }

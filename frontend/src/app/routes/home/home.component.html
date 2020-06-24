@@ -1,5 +1,4 @@
 <div class="main">
-    <h1>Produkte</h1>
     <div class="products">
         <mat-card *ngFor="let product of products">
             <mat-card-title>{{ product.name }}</mat-card-title>
@@ -8,8 +7,11 @@
                 <button mat-icon-button matTooltip="Details ansehen" [routerLink]="'/product/' + product.number">
                     <mat-icon>visibility</mat-icon>
                 </button>
-                <button *ngIf="userService.isAdmin()" mat-flat-button matTooltip="Bearbeiten" routerLink="/"><mat-icon>settings</mat-icon></button>
+                <button *ngIf="userService.isAdmin()" mat-flat-button matTooltip="Bearbeiten" [routerLink]="'/admin/product/' + product.number">
+                    <mat-icon>settings</mat-icon>
+                </button>
             </mat-card-actions>
         </mat-card>
     </div>
 </div>
+<button *ngIf="userService.isAdmin()" mat-fab color="primary" class="add" routerLink="/admin/product" matTooltip="Neuer Artikel"><mat-icon>add</mat-icon></button>

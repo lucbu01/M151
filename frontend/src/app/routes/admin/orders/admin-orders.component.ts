@@ -6,10 +6,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  templateUrl: './admin-orders.component.html',
+  styleUrls: ['./admin-orders.component.scss']
 })
-export class AdminComponent implements OnInit {
+export class AdminOrdersComponent implements OnInit {
 
   constructor(private orderService: OrderService, private router: Router, private snack: MatSnackBar) { }
 

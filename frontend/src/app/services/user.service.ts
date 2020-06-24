@@ -67,7 +67,7 @@ export class UserService {
     this.email = undefined;
     this.password = undefined;
     this.http.get('/api/user/logout', { headers: { 'X-Requested-With': 'XMLHttpRequest' }}).subscribe();
-    this.snack.open('Auf Wiedersehen');
+    this.snack.open('Auf Wiedersehen', undefined, { duration: 5000 });
     this.router.navigateByUrl('/');
   }
 }

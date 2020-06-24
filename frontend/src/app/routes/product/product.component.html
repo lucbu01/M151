@@ -4,13 +4,13 @@
         <mat-card-title>{{ product.name }}</mat-card-title>
         <mat-card-subtitle>Artikelnummer: {{ product.number }}</mat-card-subtitle>
         <mat-card-content>
-            <p>{{ product.description }}</p>
+            <p [innerText]="product.description"></p>
             <h2>CHF {{ product.price | number : '1.2-2' : 'de-CH' }}</h2>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-icon-button matTooltip="In den Warenkorb" color="primary" (click)="cartService.add(product.number)"><mat-icon>add_shopping_cart</mat-icon></button>
+            <button mat-icon-button matTooltip="In den Warenkorb" color="primary" (click)="cartService.add(product.number)"><mat-icon>save</mat-icon></button>
             <button mat-icon-button matTooltip="Zurück" routerLink="/" color="accent"><mat-icon>arrow_back</mat-icon></button>
-            <button *ngIf="userService.isAdmin()" mat-flat-button matTooltip="Bearbeiten" routerLink="/"><mat-icon>settings</mat-icon></button>
+            <button *ngIf="userService.isAdmin()" mat-icon-button matTooltip="Bearbeiten" [routerLink]="'/admin/product/' + product.number"><mat-icon>settings</mat-icon></button>
         </mat-card-actions>
     </mat-card>
 </div>
