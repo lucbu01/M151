@@ -215,7 +215,7 @@ curl -u lucbu01@bluewin.ch:12345678 -X DELETE http://localhost:8080/api/cart/rem
 - User muss schon erstellt worden sein mit entsprechenden Passwort
 
 ```sh
-curl -u lucbu01@bluewin.ch:12345678 -X PUT http://localhost:8080/api/cart/add/1/10
+curl -u lucbu01@bluewin.ch:12345678 -X PUT http://localhost:8080/api/cart/set/1/10
 ```
 
 ### Ganze Position eines Produktes aus dem Warenkorb entfernen
