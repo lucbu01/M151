@@ -30,7 +30,7 @@
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="'/order/' + row.number"></tr>
                 </table>
             </mat-card-content>
     </mat-card>
@@ -53,7 +53,7 @@
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="'/order/' + row.number"></tr>
             </table>
         </mat-card-content>
     </mat-card>

@@ -1,11 +1,20 @@
 body {
-    background-color: #EEEEEE;
+    background-color: whitesmoke;
 
     .main {
         padding: 20px;
+        padding-bottom: 10px;
 
-        .actions button {
-            margin-right: 10px;
+        mat-card {
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+
+            .mat-row:hover  {
+                background-color: whitesmoke;
+            }
         }
     }
 }
