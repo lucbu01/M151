@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 export class HomeComponent implements OnInit {
   products: any[];
 
-  constructor(private productService: ProductService, protected userService: UserService) { }
+  constructor(private productService: ProductService, public userService: UserService) { }
 
   ngOnInit(): void {
     this.productService.getProductList().subscribe(prdList => this.products = prdList);

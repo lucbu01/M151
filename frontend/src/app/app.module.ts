@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 
 import { HomeComponent } from './routes/home/home.component';
 import { ProductService } from './services/product.service';
@@ -23,6 +24,10 @@ import { UserService } from './services/user.service';
 import { LoginComponent } from './routes/login/login.component';
 import { RegisterComponent } from './routes/register/register.component';
 import { UserComponent } from './routes/user/user.component';
+import { CartComponent } from './routes/cart/cart.component';
+import { OrderComponent } from './routes/order/order.component';
+import { CartService } from './services/cart.service';
+import { OrderService } from './services/order.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,9 @@ import { UserComponent } from './routes/user/user.component';
     ProductComponent,
     LoginComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
+    CartComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -46,11 +53,14 @@ import { UserComponent } from './routes/user/user.component';
     MatFormFieldModule,
     MatTooltipModule,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule
   ],
   providers: [
     ProductService,
-    UserService
+    UserService,
+    CartService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

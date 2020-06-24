@@ -4,7 +4,7 @@
     <p>{{ product.description }}</p>
     <h2>{{ product.price }}</h2>
     <div class="actions">
-        <button mat-flat-button matTooltip="In den Warenkorb" color="primary"><mat-icon>add_shopping_cart</mat-icon></button>
+        <button mat-flat-button matTooltip="In den Warenkorb" color="primary" (click)="cartService.add(product.number)"><mat-icon>add_shopping_cart</mat-icon></button>
         <button mat-flat-button matTooltip="Zurück" routerLink="/" color="accent"><mat-icon>arrow_back</mat-icon></button>
         <button *ngIf="userService.isAdmin()" mat-flat-button matTooltip="Bearbeiten" routerLink="/"><mat-icon>settings</mat-icon></button>
     </div>
