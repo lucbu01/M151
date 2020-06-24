@@ -25,9 +25,9 @@ import { LoginComponent } from './routes/login/login.component';
 import { RegisterComponent } from './routes/register/register.component';
 import { UserComponent } from './routes/user/user.component';
 import { CartComponent } from './routes/cart/cart.component';
-import { OrderComponent } from './routes/order/order.component';
 import { CartService } from './services/cart.service';
-import { OrderService } from './services/order.service';
+import { CheckoutComponent } from './routes/checkout/checkout.component';
+import { CheckoutService } from './services/checkout.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { OrderService } from './services/order.service';
     RegisterComponent,
     UserComponent,
     CartComponent,
-    OrderComponent
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +60,7 @@ import { OrderService } from './services/order.service';
     ProductService,
     UserService,
     CartService,
-    OrderService
+    CheckoutService
   ],
   bootstrap: [AppComponent]
 })
