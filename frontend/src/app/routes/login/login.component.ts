@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
     email: new FormControl('', Validators.email),
     password: new FormControl('', Validators.minLength(8))
   });
+  showPassword = false;
 
   constructor(protected userService: UserService, private router: Router) { }
 

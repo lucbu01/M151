@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
     postalCode: new FormControl(''),
     city: new FormControl('')
   });
+  showPassword = false;
 
   constructor(private userService: UserService) { }
 
