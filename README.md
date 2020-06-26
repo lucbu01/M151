@@ -8,6 +8,7 @@ Webshop Projekt für das Modul 151
   - [Technologien](#technologien)
 - [Installation](#installation)
 - [Curl-Beispiele](#curl-beispiele)
+- [Präsentation](#präsentation)
 
 ## Projektbeschrieb
 
@@ -320,3 +321,7 @@ curl -u admin@admin.ch:12345678 http://localhost:8080/api/order/admin/open
 ```sh
 curl -u admin@admin.ch:12345678 -X PUT http://localhost:8080/api/order/admin/sent/1
 ```
+
+# Präsentation
+
+Die Präsentation im PDF Format ist [hier](https://github.com/lucbu01/M151/blob/master/Presentation.pdf) zu finden.
