@@ -17,7 +17,7 @@ public class ProductDto extends Dto {
   private Long number;
 
   @NotBlank
-  @Length(max = 50)
+  @Length(max = 100)
   private String name;
 
   @NotBlank

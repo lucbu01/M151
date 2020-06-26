@@ -30,14 +30,16 @@ public class UserService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     Optional<User> user = userRepository.findByEmail(username);
-    user.orElseThrow(() -> new UsernameNotFoundException("no user with email '" + username + "'"));
+    user.orElseThrow(() -> new UsernameNotFoundException(
+        "Es wurde kein Benutzer mit der E-Mail Adresse '" + username + "' gefunden!"));
     return user.get();
   }
 
   public void newUser(UserDto userDto) throws Exception {
     userDto.validate();
     if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
-      throw new WebshopException("email already exists");
+      throw new WebshopException(
+          "Die E-Mail Adresse '" + userDto.getEmail() + "' wird bereits für einen anderen Account verwendet!");
     }
     userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
     this.userRepository.save(new User(userDto));
@@ -45,7 +47,8 @@ public class UserService implements UserDetailsService {
 
   public UserDto getInfo(Authentication auth) throws UsernameNotFoundException {
     Optional<User> user = userRepository.findByEmail(auth.getName());
-    user.orElseThrow(() -> new UsernameNotFoundException("no user with email '" + auth.getName() + "'"));
+    user.orElseThrow(() -> new UsernameNotFoundException(
+        "Es wurde kein Benutzer mit der E-Mail Adresse '" + auth.getName() + "' gefunden!"));
     return new UserDto(user.get());
   }
 

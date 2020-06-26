@@ -20,7 +20,7 @@ public class OrderListPreviewDto {
     this.status = order.getStatus();
     this.updated = order.getUpdated();
     order.getPositions().stream()
-        .forEach(pos -> this.total = pos.getProductPrice().multiply(new BigDecimal(pos.getCount())));
+        .forEach(pos -> this.total = this.total.add(pos.getProductPrice().multiply(new BigDecimal(pos.getCount()))));
   }
 
   public Long getNumber() {

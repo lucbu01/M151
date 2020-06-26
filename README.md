@@ -75,6 +75,18 @@ Als Administrator möchte ich den Status einer Bestellung auf VERSCHICKT stellen
 
 ~ = repository root folder
 
+Schritte bitte in geschriebener Reihenfolge ausführen.
+
+### Bedingungen
+
+- JDK 1.8+ muss installiert sein
+- NodeJS & NPM müssen installiert sein
+- Folgende Ports müssen frei sein:
+  - 5432 (PostgreSQL)
+  - 5050 (pgAdmin)
+  - 8080 (Backend)
+  - 4200 (Frontend)
+
 ### Datenbank
 
 Ordner: ~
@@ -82,6 +94,20 @@ Ordner: ~
 ```sh
 sudo docker-compose up
 ```
+
+Danach im Browser mit `http://localhost:5050` verbinden und Datenbankserver hinzufügen (Create Server...).
+
+- pgAdmin
+  - Benutzername: admin@admin.ch
+  - Passwort: secret
+- PostgreSQL
+  - Benutzername: admin
+  - Passwort: secret
+  - Host: postgres
+  - Port: 5432
+  - Maintenance database: postgres
+
+Wenn die Datenbank `webshop` auf dem Datenbankserver noch nicht vorhanden ist, diese erstellen.
 
 ### Backend
 

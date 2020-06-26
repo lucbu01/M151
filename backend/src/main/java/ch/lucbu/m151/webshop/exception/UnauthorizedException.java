@@ -7,4 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UnauthorizedException extends RuntimeException {
   private static final long serialVersionUID = 1490020994108602501L;
 
+  public UnauthorizedException() {
+    super("Sie sind für diesen Vorgang nicht berechtigt!");
+  }
 }

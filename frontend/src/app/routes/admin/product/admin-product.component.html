@@ -5,14 +5,14 @@
             <mat-card-subtitle *ngIf="product">Artikelnummer: {{ product.number }}</mat-card-subtitle>
             <mat-card-content>
                 <p>
-                    <mat-form-field appearance="outline">
+                    <mat-form-field appearance="outline" style="width: 100%; max-width: 800px;">
                         <mat-label>Name</mat-label>
-                        <input matInput formControlName="name" required>
+                        <input matInput formControlName="name" maxlength="100" required>
                         <mat-error>Der Produktname ist ein Pflichtfeld</mat-error>
                     </mat-form-field>
                 </p>
                 <p>
-                    <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-form-field appearance="outline" style="width: 100%; max-width: 1400px;">
                         <mat-label>Beschreibung</mat-label>
                         <textarea matInput formControlName="description" required style="height: 200px;"></textarea>
                         <mat-error>Die Produktbeschreibung ist ein Pflichtfeld</mat-error>

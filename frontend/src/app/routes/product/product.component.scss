@@ -1,0 +1,9 @@
+.main {
+    display: flex;
+    justify-content: center;
+
+    mat-card {
+        max-width: 1200px;
+        min-width: 600px;
+    }
+}
